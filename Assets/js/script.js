@@ -60,7 +60,12 @@ function writePassword() {
   confirmLowercase = window.confirm ("Should the password include lowercase letters?")
   confirmNumbers = window.confirm ("Should the password include numbers?")
   confirmSpecial = window.confirm ("Should the password include symbols?")
-  numOfCharacters = window.prompt ("How many characters should the password include? /n Please only input values no lower than 8 and no higher than 128")
+  numOfCharacters = window.prompt ("How many characters should the password include? /n Please only input values no lower than 8 and no higher than 128") 
+    if (numOfCharacters < 8) {
+      window.alert ("Please generate a password at least 8 characters long.")
+    } else if (numOfCharacters > 128) {
+      window.alert ("Please generate a password no longer than 128 characters.")
+    }
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
