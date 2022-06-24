@@ -47,8 +47,31 @@ var numOfCharacters = 0
 
 //Functions
 function generatePassword () {
+  computerChoices = ["R", "P", "S"]
+  const getComputerChoice = computerChoices[Math.floor(Math.random(0, 3) * computerChoices.length)];
+  
+  
+  console.log (getComputerChoice)
+
   var num1 = 1+1
   return num1
+}
+
+//Creates selectorArray based on user's choices
+function createSelectorArray () {
+  if (confirmUppercase === true) {
+    selectorArray.push (uppercaseLetters)
+  }
+  if (confirmLowercase === true) {
+    selectorArray.push (lowercaseLetters)
+  }
+  if (confirmNumbers === true) {
+    selectorArray.push (numbers)
+  }
+  if (confirmSpecial === true) {
+    selectorArray.push (special)
+  }
+  console.log (selectorArray)
 }
 
 // Handles error messages for the wrong kind of input into the prompt. Wrong input includes numbers too high, numbers too low, and not a number.
@@ -74,10 +97,12 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
+  // Various confirm dialogues assigning their True/False outputs to variables 
   confirmUppercase = window.confirm ("Should the password include uppercase letters?")
   confirmLowercase = window.confirm ("Should the password include lowercase letters?")
   confirmNumbers = window.confirm ("Should the password include numbers?")
   confirmSpecial = window.confirm ("Should the password include symbols?")
+  createSelectorArray ()
   promptNumber ()
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
