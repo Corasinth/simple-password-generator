@@ -51,13 +51,14 @@ function generatePassword () {
   return num1
 }
 
+// Handles error messages for the wrong kind of input into the prompt. Wrong input includes numbers too high, numbers too low, and not a number.
 function promptNumber () {
   numOfCharacters = window.prompt ("How many characters should the password include?\nPlease only input values no lower than 8 and no higher than 128"); 
-  if ((numOfCharacters < 8)  && (Boolean(numOfCharacters) === true)) {
+  if (numOfCharacters < 8) {
     window.alert ("Please generate a password at least 8 characters long.");
     numOfCharacters = 0;
     promptNumber ();
-  } else if ((numOfCharacters > 128) && (Boolean(numOfCharacters) === true)) {
+  } else if (numOfCharacters > 128) {
     window.alert ("Please generate a password no longer than 128 characters.");
     numOfCharacters = 0;
     promptNumber ();
@@ -65,9 +66,7 @@ function promptNumber () {
     window.alert ("Please input a number.");
     numOfCharacters = 0;
     promptNumber ();
-  } else if (Boolean(numOfCharacters) === false) {
-    return; 
-  }
+}
 }
 
 // Assignment Code
