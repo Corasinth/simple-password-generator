@@ -46,8 +46,19 @@ var confirmSpecial
 var numOfCharacters = 0
 
 //Functions
+/*
 function generatePassword () {
-  computerChoices = ["R", "P", "S"]
+  for (var i = 0; i < numOfCharacters; i++)
+  var randomArray = selectorArray[Math.floor(Math.random() * selectorArray.length)];
+  var option = randomArray[Math.floor(Math.random() * randomArray.length)];
+  console.log (option)
+}
+*/
+
+/*
+  var randomArray = selectorArray[Math.floor(Math.random() * selectorArray.length)];
+
+computerChoices = ["R", "P", "S"]
   const getComputerChoice = computerChoices[Math.floor(Math.random(0, 3) * computerChoices.length)];
   
   
@@ -55,42 +66,43 @@ function generatePassword () {
 
   var num1 = 1+1
   return num1
-}
-
+*/
 //Creates selectorArray based on user's choices
 function createSelectorArray () {
   if (confirmUppercase === true) {
-    selectorArray.push (uppercaseLetters)
+    selectorArray.push (uppercaseLetters);
   }
   if (confirmLowercase === true) {
-    selectorArray.push (lowercaseLetters)
+    selectorArray.push (lowercaseLetters);
   }
   if (confirmNumbers === true) {
-    selectorArray.push (numbers)
+    selectorArray.push (numbers);
   }
   if (confirmSpecial === true) {
-    selectorArray.push (special)
+    selectorArray.push (special);
   }
-  console.log (selectorArray)
 }
 
 // Handles error messages for the wrong kind of input into the prompt. Wrong input includes numbers too high, numbers too low, and not a number.
 function promptNumber () {
-  numOfCharacters = window.prompt ("How many characters should the password include?\nPlease only input values no lower than 8 and no higher than 128"); 
-  if (numOfCharacters < 8) {
+  var stringOfCharacterQuantity = window.prompt ("How many characters should the password include?\nPlease only input values no lower than 8 and no higher than 128"); 
+  if ((parseInt (stringOfCharacterQuantity)) < 8) {
     window.alert ("Please generate a password at least 8 characters long.");
-    numOfCharacters = 0;
+    stringOfCharacterQuantity = 0;
     promptNumber ();
-  } else if (numOfCharacters > 128) {
+  } else if ((parseInt (stringOfCharacterQuantity)) > 128) {
     window.alert ("Please generate a password no longer than 128 characters.");
-    numOfCharacters = 0;
+    stringOfCharacterQuantity = 0;
     promptNumber ();
-  } else if (Boolean (parseInt (numOfCharacters)) === false) {
+  } else if (Boolean (parseInt (stringOfCharacterQuantity)) === false) {
     window.alert ("Please input a number.");
-    numOfCharacters = 0;
+    stringOfCharacterQuantity = 0;
     promptNumber ();
 }
+  numOfCharacters = parseInt (stringOfCharacterQuantity);
+  console.log (numOfCharacters)
 }
+
 
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
@@ -104,7 +116,7 @@ function writePassword() {
   confirmSpecial = window.confirm ("Should the password include symbols?")
   createSelectorArray ()
   promptNumber ()
-  var password = generatePassword();
+  //var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
