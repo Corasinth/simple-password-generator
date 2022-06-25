@@ -88,7 +88,6 @@ function promptNumber () {
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
-// The console marks this code as a [Violation] 'click handler' too XXXX ms, however, the console timers demonstrate this is because the user takes time to provide nessecary inputs. Since rearrangment of this code doesn't prevent this delay, I have left the flow as is. 
 function writePassword() {
   // Various confirm dialogues assigning their True/False outputs to variables 
   popConfirms ();
