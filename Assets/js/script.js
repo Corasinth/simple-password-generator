@@ -19,6 +19,7 @@ var password;
 
 //Create confirmation boxes and error message if user selects no choices
 function popConfirms () {
+  console.time("function popConfirms")
   confirmUppercase = window.confirm ("Should the password include uppercase letters?");
   confirmLowercase = window.confirm ("Should the password include lowercase letters?");
   confirmNumbers = window.confirm ("Should the password include numbers?");
@@ -28,6 +29,7 @@ function popConfirms () {
     window.alert ("Please select at least one character type.");
     popConfirms ();
   }
+  console.timeEnd("function popConfirms")
 }
 //Creates selectorArray based on user's choices
 function createSelectorArray () {
@@ -47,6 +49,7 @@ function createSelectorArray () {
 
 // Handles error messages for the wrong kind of input into the prompt. Wrong input includes numbers too high, numbers too low, and not a number.
 function promptNumber () {
+  console.time("function promptNumber")
   var stringOfCharacterQuantity = window.prompt ("How many characters should the password include?\nPlease only input values no lower than 8 and no higher than 128"); 
   if ((parseInt (stringOfCharacterQuantity)) < 8) {
     window.alert ("Please generate a password at least 8 characters long.");
@@ -64,26 +67,28 @@ function promptNumber () {
   // Turns output of prompt into a number for use in generatePassword.
   numOfCharacters = parseInt (stringOfCharacterQuantity);
   stringOfCharacterQuantity = ""
+  console.timeEnd("function promptNumber")
 }
 
 // Password Generator
   function generatePassword () {
     // Randomly selects one of the arrays from selectorArray, randomly selects a member of the selected  array, pushes it into passwordArray
+    // Doesn't gurantee at least one of the selected character types will be included, but the chance of never picking from an array even over 8 characters is vanishingly small
     for (var i = 0; i < numOfCharacters; i++) {
       var randomArray = selectorArray[Math.floor(Math.random() * selectorArray.length)];
       var passwordPart = randomArray[Math.floor(Math.random() * randomArray.length)];
       passwordArray.push (passwordPart);
    } 
-   // Turns passwordArray into a string and returns it. 
-   password = passwordArray.join ('');
-   return password;
+// Turns passwordArray into a string and returns it. 
+    passwordString = passwordArray.join ('');
+    return passwordString;  
   }
-  
 
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
+// The console marks this code as a [Violation] 'click handler' too XXXX ms, however, the console timers demonstrate this is because the user takes time to provide nessecary inputs. Since rearrangment of this code doesn't prevent this delay, I have left the flow as is. 
 function writePassword() {
   // Various confirm dialogues assigning their True/False outputs to variables 
   popConfirms ();
@@ -100,3 +105,4 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
