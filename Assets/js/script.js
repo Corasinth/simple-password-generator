@@ -44,17 +44,9 @@ var confirmLowercase
 var confirmNumbers 
 var confirmSpecial
 var numOfCharacters = 0
+var password
 
 //Functions
-/*
-function generatePassword () {
-  for (var i = 0; i < numOfCharacters; i++)
-  var randomArray = selectorArray[Math.floor(Math.random() * selectorArray.length)];
-  var option = randomArray[Math.floor(Math.random() * randomArray.length)];
-  console.log (option)
-}
-*/
-
 /*
   var randomArray = selectorArray[Math.floor(Math.random() * selectorArray.length)];
 
@@ -100,9 +92,19 @@ function promptNumber () {
     promptNumber ();
 }
   numOfCharacters = parseInt (stringOfCharacterQuantity);
-  console.log (numOfCharacters)
 }
 
+  function generatePassword () {
+    for (var i = 0; i < numOfCharacters; i++) {
+      var randomArray = selectorArray[Math.floor(Math.random() * selectorArray.length)];
+      var passwordPart = randomArray[Math.floor(Math.random() * randomArray.length)];
+      passwordArray.push (passwordPart);
+   } 
+   console.log (passwordArray)
+   password = passwordArray.join ('');
+   return password;
+  }
+  
 
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
@@ -116,7 +118,8 @@ function writePassword() {
   confirmSpecial = window.confirm ("Should the password include symbols?")
   createSelectorArray ()
   promptNumber ()
-  //var password = generatePassword();
+  console.log (numOfCharacters)
+  var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
