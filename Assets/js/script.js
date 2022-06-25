@@ -17,6 +17,18 @@ var password
 
 //Functions
 
+//Create confirmation boxes and error message if user selects no choices
+function popConfirms () {
+  confirmUppercase = window.confirm ("Should the password include uppercase letters?")
+  confirmLowercase = window.confirm ("Should the password include lowercase letters?")
+  confirmNumbers = window.confirm ("Should the password include numbers?")
+  confirmSpecial = window.confirm ("Should the password include symbols?")
+  // Error message logic if nothing is chosen
+  if (confirmUppercase === false && confirmLowercase === false && confirmNumbers === false && confirmSpecial === false) { 
+    window.alert ("Please select at least one character type.")
+    popConfirms ()
+  }
+}
 //Creates selectorArray based on user's choices
 function createSelectorArray () {
   if (confirmUppercase === true) {
@@ -74,16 +86,13 @@ var generateBtn = document.querySelector("#generate");
 // Write password to the #password input
 function writePassword() {
   // Various confirm dialogues assigning their True/False outputs to variables 
-  confirmUppercase = window.confirm ("Should the password include uppercase letters?")
-  confirmLowercase = window.confirm ("Should the password include lowercase letters?")
-  confirmNumbers = window.confirm ("Should the password include numbers?")
-  confirmSpecial = window.confirm ("Should the password include symbols?")
+  popConfirms ()
   createSelectorArray ()
   promptNumber ()
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
-  // Resets relevant variables so that generator can be reused without overlapping values from previous generation. 
+  // Resets relevant variables so that generator can be reused without overlapping values from previous generation
   selectorArray = [];
   passwordArray = [];
   numOfCharacters = 0;
