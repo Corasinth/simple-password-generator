@@ -14,12 +14,23 @@ var confirmNumbers;
 var confirmSpecial;
 var numOfCharacters = 0;
 var password;
+var stringOfCharacterQuantity;
 
 //Functions
 
+//Opens relevant dialogue boxes
+function startPasswordGenerator () {
+  console.time("function popConfirms")
+  popConfirms ();
+  console.timeEnd("function popConfirms")
+  createSelectorArray ();
+  console.time("function promptNumber");
+  promptNumber ();
+  console.timeEnd("function promptNumber");
+}
+
 //Create confirmation boxes and error message if user selects no choices
 function popConfirms () {
-  console.time("function popConfirms")
   confirmUppercase = window.confirm ("Should the password include uppercase letters?");
   confirmLowercase = window.confirm ("Should the password include lowercase letters?");
   confirmNumbers = window.confirm ("Should the password include numbers?");
@@ -29,7 +40,6 @@ function popConfirms () {
     window.alert ("Please select at least one character type.");
     popConfirms ();
   }
-  console.timeEnd("function popConfirms")
 }
 //Creates selectorArray based on user's choices
 function createSelectorArray () {
@@ -49,8 +59,7 @@ function createSelectorArray () {
 
 // Handles error messages for the wrong kind of input into the prompt. Wrong input includes numbers too high, numbers too low, and not a number.
 function promptNumber () {
-  console.time("function promptNumber")
-  var stringOfCharacterQuantity = window.prompt ("How many characters should the password include?\nPlease only input values no lower than 8 and no higher than 128"); 
+  stringOfCharacterQuantity = window.prompt ("How many characters should the password include?\nPlease only input values no lower than 8 and no higher than 128"); 
   if ((parseInt (stringOfCharacterQuantity)) < 8) {
     window.alert ("Please generate a password at least 8 characters long.");
     stringOfCharacterQuantity = "";
@@ -63,11 +72,12 @@ function promptNumber () {
     window.alert ("Please input a number.");
     stringOfCharacterQuantity = "";
     promptNumber ();
-}
+} else {
   // Turns output of prompt into a number for use in generatePassword.
   numOfCharacters = parseInt (stringOfCharacterQuantity);
   stringOfCharacterQuantity = ""
-  console.timeEnd("function promptNumber")
+  writePassword ()
+}
 }
 
 // Password Generator
@@ -89,10 +99,6 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  // Various confirm dialogues assigning their True/False outputs to variables 
-  popConfirms ();
-  createSelectorArray ();
-  promptNumber ();
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
@@ -103,5 +109,5 @@ function writePassword() {
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener("click", startPasswordGenerator);
 
